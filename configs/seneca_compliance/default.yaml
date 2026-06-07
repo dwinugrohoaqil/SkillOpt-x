@@ -1,0 +1,51 @@
+_base_: ../_base_/default.yaml
+
+env:
+  name: seneca_compliance
+  skill_init: d:\Aplikasi\skillopt-seneca\seeds\markdown-compliance_seed.md
+  split_dir: d:\Aplikasi\skillopt-seneca\data\seneca-compliance-split
+
+  split_mode: split_dir
+  workers: 4
+  max_completion_tokens: 8000
+
+train:
+  num_epochs: 2
+  batch_size: 5
+  accumulation: 1
+  seed: 42
+
+gradient:
+  analyst_workers: 4
+  minibatch_size: 4
+  merge_batch_size: 4
+
+optimizer:
+  learning_rate: 4
+  lr_scheduler: constant
+  use_slow_update: true
+  use_meta_skill: true
+
+evaluation:
+  use_gate: true
+  eval_test: true
+
+model:
+  backend: qwen_chat
+  optimizer_backend: qwen_chat
+  target_backend: qwen_chat
+  optimizer: qwen3.5:9b
+  target: qwen3.5:9b
+  qwen_chat_base_url: http://localhost:11434/v1
+  qwen_chat_api_key: ollama
+  qwen_chat_enable_thinking: false
+  qwen_chat_max_tokens: 8000
+  optimizer_qwen_chat_base_url: http://localhost:11434/v1
+  optimizer_qwen_chat_api_key: ollama
+  optimizer_qwen_chat_enable_thinking: false
+  optimizer_qwen_chat_max_tokens: 8000
+  target_qwen_chat_base_url: http://localhost:11434/v1
+  target_qwen_chat_api_key: ollama
+  target_qwen_chat_enable_thinking: false
+  target_qwen_chat_max_tokens: 8000
+

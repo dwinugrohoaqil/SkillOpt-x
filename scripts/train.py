@@ -93,6 +93,12 @@ def _register_builtins() -> None:
         _ENV_REGISTRY["swebench"] = SWEBenchAdapter
     except ImportError:
         pass
+    try:
+        from skillopt.envs.seneca_compliance.adapter import SenecaComplianceAdapter
+        _ENV_REGISTRY["seneca_compliance"] = SenecaComplianceAdapter
+    except ImportError:
+        pass
+
 
 
 def get_adapter(cfg: dict):
@@ -492,7 +498,7 @@ def load_config(args: argparse.Namespace) -> dict:
     # Auto-generate output root
     if not flat.get("out_root"):
         env = flat.get("env", "unknown")
-        model = flat.get("optimizer_model", "unknown").replace("/", "-")
+        model = flat.get("optimizer_model", "unknown").replace("/", "-").replace(":", "-")
         ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         flat["out_root"] = os.path.join("outputs", f"skillopt_{env}_{model}_{ts}")
 

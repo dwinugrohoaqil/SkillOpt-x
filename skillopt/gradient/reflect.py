@@ -504,8 +504,8 @@ def run_minibatch_reflect(
     n_succ_batches = len(succ_batches)
     print(
         f"    [2/6 REFLECT minibatch] "
-        f"failure={len(failures)}→{n_fail_batches} groups  "
-        f"success={len(successes)}→{n_succ_batches} groups  "
+        f"failure={len(failures)}->{n_fail_batches} groups  "
+        f"success={len(successes)}->{n_succ_batches} groups  "
         f"(M={minibatch_size}, L={edit_budget}, workers={workers})"
     )
 
@@ -582,7 +582,7 @@ def run_minibatch_reflect(
             n_edits = len(get_payload_items(patch.get("patch", {}) if patch else {}, update_mode))
             print(
                 f"      [analyst] {i}/{len(all_pending)} {tag} "
-                f"({batch_len} trajs) → {n_edits} {payload_label(update_mode)}"
+                f"({batch_len} trajs) -> {n_edits} {payload_label(update_mode)}"
             )
 
     return raw_patches

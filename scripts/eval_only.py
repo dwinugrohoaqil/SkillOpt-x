@@ -339,7 +339,7 @@ def main() -> None:
 
     if not cfg.get("out_root"):
         env = cfg.get("env", "unknown")
-        model = cfg.get("target_model", "unknown").replace("/", "-")
+        model = cfg.get("target_model", "unknown").replace("/", "-").replace(":", "-")
         ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         cfg["out_root"] = os.path.join("outputs", f"eval_{env}_{model}_{ts}")
 

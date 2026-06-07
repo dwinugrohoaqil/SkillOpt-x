@@ -192,6 +192,9 @@ def _chat_messages_impl(
         "max_tokens": min(max_completion_tokens, config.max_tokens),
     }
     payload["chat_template_kwargs"] = {"enable_thinking": config.enable_thinking}
+    # Ollama uses top-level "think" key (not chat_template_kwargs)
+    payload["think"] = config.enable_thinking
+
     if config.temperature is not None:
         payload["temperature"] = config.temperature
     if tools:
